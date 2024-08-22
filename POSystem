@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+class Product {
+    private int id;
+    private String name;
+    private double price;
+    private int quantity;
+    private String category;
+    private double wholesalePrice;
+
+    public Product(int id, String name, double price, int quantity, String category, double wholesalePrice) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.wholesalePrice = wholesalePrice;
+    }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public double getWholesalePrice() { return wholesalePrice; }
+    public void setWholesalePrice(double wholesalePrice) { this.wholesalePrice = wholesalePrice; }
+}
+
+class Customer {
+    private String name;
+    private String address;
+
+    public Customer(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+}
+
+class POS {
+    private Product product;
+    private int quantity;
+    private double price;
+
+    public POS(Product product, int quantity, double price) {
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+}
+
+class Sale {
+    private Date date;
+    private double totalAmount;
+    private List<POS> items;
+
+    public Sale(Date date, double totalAmount, List<POS> items) {
+        this.date = date;
+        this.totalAmount = totalAmount;
+        this.items = items;
+    }
+
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
+
+    public double getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
+
+    public List<POS> getItems() { return items; }
+    public void setItems(List<POS> items) { this.items = items; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Product product1 = new Product(1, "Laptop", 1200.00, 10, "Electronics", 1000.00);
+        Product product2 = new Product(2, "Mouse", 25.00, 50, "Electronics", 15.00);
+
+        POS pos1 = new POS(product1, 1, 1200.00);
+        POS pos2 = new POS(product2, 2, 50.00);
+
+        List<POS> items = new ArrayList<>();
+        items.add(pos1);
+        items.add(pos2);
+        Sale sale = new Sale(new Date(), 1250.00, items);
+
+        System.out.println("Sale Date: " + sale.getDate());
+        System.out.println("Total Amount: $" + sale.getTotalAmount());
+        System.out.println("Items:");
+        for (POS pos : sale.getItems()) {
+            System.out.println("- Product: " + pos.getProduct().getName() + ", Quantity: " + pos.getQuantity() + ", Price: $" + pos.getPrice());
+        }
+    }
+}
